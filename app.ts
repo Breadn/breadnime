@@ -19,6 +19,13 @@ const port = 3000;
 const filestore = filestoreImport(session);
 app.set('title', 'breadnime!');
 
+// App settings
+app.set('query parser', (str: string) => {
+    return qs.parse(str);
+});
+app.set('views', './views');
+app.set('view engine', 'pug');
+
 // Session setup
 app.use(session({
     name: 'session-id',
@@ -28,10 +35,8 @@ app.use(session({
     store: new filestore()
 }));
 
-// Query Parser setup
-app.set('query parser', (str: string) => {
-    return qs.parse(str);
-});
+// Static setup
+app.use('/static', express.static('public'));
 
 // Note: session declarations in node_modules/@types/express-session/index.d.ts:222
 app.get('/session.html', (req, res) => { // TODO: implement sessions in respective pages

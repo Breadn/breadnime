@@ -4,7 +4,7 @@ import { Request, Response } from 'express'
 
 export function indexView(req: Request, res: Response) {
     console.log("Ended request at indexView render");
-    res.send(res.locals.data);
+    res.render('index', { data: res.locals.data });
 }
 
 export function galleryView(req: Request, res: Response) {

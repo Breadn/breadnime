@@ -7,6 +7,7 @@ import { ANIME } from '@consumet/extensions'
 
 const API_PROVIDER = new ANIME.Gogoanime();
 
+/* GET query @params: search */
 // Function returning JSON data on anime searched by keywords
 export async function getSearch(req: Request, res: Response, next: Function) {
     const searchTerms = String(req.query.search || "");
@@ -22,6 +23,8 @@ export async function getSearch(req: Request, res: Response, next: Function) {
     next();
 }
 
+
+/* GET query @params: animeid, episodeid */
 // Function for returning JSON data specific to anime ID
 export async function getAnime(req: Request, res: Response, next: Function) {
     const animeID = String(req.query.animeid || "");
