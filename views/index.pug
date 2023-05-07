@@ -19,8 +19,8 @@ html(lang='en')
                     h1 breadnime!
                 h3 Ad-free anime, really!
                 .search-wrapper
-                    form#search
-                        input#anime-search.search(type='text' placeholder='Search' method='get' action='/search')
+                    form#search(method='get' action='/search')
+                        input#anime-search.search(type='text' name='search' placeholder='Search')
                         input.button(type='submit' value='GO!')
                         input.rando(type='button' value='Random')
             #intro-text
