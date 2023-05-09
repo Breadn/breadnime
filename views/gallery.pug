@@ -1,0 +1,22 @@
+extends layouts/base.pug
+include mixins/mixes.pug
+
+block styles 
+    link(rel='stylesheet' href='static/styles/style.css')
+    link(rel='stylesheet' href='static/styles/gallery.css')
+
+block nav 
+    +navbar
+
+block section 
+    section 
+        h4.side#result-header Search Result: NAME SEARCHED
+        .gallery 
+            // Render gallery data here
+            - let aniData = data;
+            each ani in aniData.results 
+                a(id=ani.id onclick='openAnime(this)')
+                    .imggall 
+                        .img 
+                            img(src=ani.image)
+                        h4= ani.title

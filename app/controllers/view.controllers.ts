@@ -9,7 +9,7 @@ export function indexView(req: Request, res: Response) {
 
 export function galleryView(req: Request, res: Response) {
     console.log("Ended request at galleryView render");
-    res.send(res.locals.data);
+    res.render('gallery', { data: res.locals.data });
 }
 
 export function animeView(req: Request, res: Response) {
