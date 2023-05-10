@@ -1,52 +1,37 @@
-doctype html 
-html(lang='en')
-    head 
-        meta(charset='utf-8')
-        title breadnime! - ad free anime
-        link(rel='preconnect' href='https://fonts.googleapis.com')
-        link(rel='preconnect' href='https://fonts.gstatic.com' crossorigin='')
-        link(rel='preconnect' href='https://fonts.googleapis.com')
-        link(rel='preconnect' href='https://fonts.gstatic.com' crossorigin='')
-        link(href='https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@900&display=swap' rel='stylesheet')
-        link(href='https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap' rel='stylesheet')
-        link(rel='stylesheet' href='static/styles/index.css')
-        link(rel='stylesheet' href='static/styles/style.css')
-    body
-        section
-            .main-content
-                #main-logo
-                    img.logo(src='static/images/bread.png' alt='logo')
-                    h1 breadnime!
-                h3 Ad-free anime, really!
-                .search-wrapper
-                    form#search(method='get' action='/search')
-                        input#anime-search.search(type='text' name='search' placeholder='Search')
-                        input.button(type='submit' value='GO!')
-                        input.rando(type='button' value='Random')
-            #intro-text
-                h4
-                | Enjoy your favorite anime, browsing stress (crtl+w) free.
-            .sub-content
-                button
-                    img#left-carousel(src='static/images/Vector.png' alt='left')
-                .carousel
-                    // Render carousel data here
-                    - let aniData = data;
-                    each ani in aniData.results
-                        .carousel-item
-                            a(id=ani.id onclick='openAnime(this)')
-                                .mainview 
-                                    .img 
-                                        img(src=ani.image)
-                                    p= ani.title
-                            //- TODO: add onclick GET request to open aniID
-                button
-                    img#right-carousel(src='static/images/Vector-1.png' alt='right')
+extends layouts/base.pug
+
+block styles 
+    link(rel='stylesheet' href='static/styles/style.css')
+    link(rel='stylesheet' href='static/styles/index.css')
+
+block section
+    section
+        .main-content
+            #main-logo
+                img.logo(src='static/images/bread.png' alt='logo')
+                h1 breadnime!
+            h3 Ad-free anime, really!
+            .search-wrapper
+                form#search
+                    input#anime-search.search(type='text' placeholder='Search' method='get' action='/search')
+                    input.button(type='submit' value='GO!')
+                    input.rando(type='button' value='Random')
+        #intro-text
+            h4
+            | Enjoy your favorite anime, browsing stress (crtl+w) free.
+        .sub-content
+            button
+                img#left-carousel(src='static/images/Vector.png' alt='left')
+            .carousel
+                // Render carousel data here
+                - let aniData = data;
+                each ani in aniData.results
+                    .carousel-item
+                        a(id=ani.id onclick='openAnime(this)')
+                            .mainview 
+                                .img 
+                                    img(src=ani.image)
+                                p= ani.title
+            button
+                img#right-carousel(src='static/images/Vector-1.png' alt='right')
         
-        footer
-            .footer-content
-                h6 Built with the GoGoAnime API by users, for users.
-                p.h7 @breadnmkii @localhermit, 2022. A CSE204 final project
-        
-        script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js")
-        script(src="static/javascripts/view.js")

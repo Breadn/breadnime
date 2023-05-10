@@ -10,6 +10,8 @@ const API_PROVIDER = new ANIME.Gogoanime();
 /* GET query @params: search */
 // Function returning JSON data on anime searched by keywords
 export async function getSearch(req: Request, res: Response, next: Function) {
+    console.log("Get search middleware");
+
     const searchTerms = String(req.query.search || "");
     const result = await API_PROVIDER.search(searchTerms)
     .then(data => {
@@ -27,6 +29,8 @@ export async function getSearch(req: Request, res: Response, next: Function) {
 /* GET query @params: animeid, episodeid */
 // Function for returning JSON data specific to anime ID
 export async function getAnime(req: Request, res: Response, next: Function) {
+    console.log("Get anime middleware");
+
     const animeID = String(req.query.animeid || "");
     const result = await API_PROVIDER.fetchAnimeInfo(animeID)
     .then(data => {
@@ -41,6 +45,8 @@ export async function getAnime(req: Request, res: Response, next: Function) {
 
 // Function for returning M3U8 streaming URLs of specific episode ID
 export async function getEpisodeStreams(req: Request, res: Response, next: Function) {
+    console.log("Get streams middleware");
+
     const episodeID = String(req.query.episodeid || "");
     const result = await API_PROVIDER.fetchEpisodeSources(episodeID)
     .then(data => {
@@ -60,6 +66,8 @@ export async function getEpisodeStreams(req: Request, res: Response, next: Funct
 
 // Function returning JSON data on current popular anime
 export async function getPopular(req: Request, res: Response, next: Function) {
+    console.log("Get popular middleware");
+
     const result = await API_PROVIDER.fetchTopAiring()
     .then(data => {
         console.log(`Fetched top airing detail`);
