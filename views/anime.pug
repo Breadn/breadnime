@@ -1,0 +1,42 @@
+extends layouts/base.pug
+include mixins/mixes.pug
+
+block nav 
+    +navbar
+
+block append styles 
+    link(rel='stylesheet' href='static/styles/anime.css')
+    link(rel='stylesheet' href="https://unpkg.com/video.js/dist/video-js.css")
+
+block section
+    - let aniData = animeData
+    - let vidData = streamData
+    section
+        .main
+            .rightmain
+                video#hls-video.video-js.vjs-default-skin(width='960' height='400' controls='')
+                    source#stream-source(src='placeholder' type='application/x-mpegURL')
+                .quality
+                    // Render qualities here
+                    each src in vidData.sources
+                        button(type='button' title=src.quality id=src.quality value=`.quality` onclick="selectButtonCSS(this);renderVideoStream('"+src.url+"')") #{src.quality}
+                p.title #{aniData.title}
+                #ani-stats
+                    h6#ani-released Released: #{aniData.releaseDate}
+                    h6#ani-status Status: #{aniData.status}
+                    .genre
+                        // Render genres here
+                        each genre in aniData.genres 
+                            #genre(onclick=`openGenre('${genre}')`) ##{genre}
+                div 
+                    img#ani-image(src=aniData.image alt='ani-image' style='float:left;')
+                    p#ani-description #{aniData.description}
+                .ep
+                    // Render buttons here
+                    each ep in aniData.episodes
+                        button(type='button' title=ep.id id=ep.id onclick=`selectButtonCSS(this);openAnimeEpisode(this, '${aniData.id}')`) #{ep.number}
+
+block append scripts 
+    script(src="static/javascripts/anime.js")
+    script(src='https://unpkg.com/video.js/dist/video.js')
+    script(src='https://unpkg.com/videojs-flash/dist/videojs-flash.js')

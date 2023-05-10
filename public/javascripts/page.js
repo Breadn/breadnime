@@ -24,10 +24,16 @@ $('.sub-content button').click((e) => {
 });
 
 // Function to open an "anime card" item, requires that the onclick
-// handler's ID is set to the animeID
+// handler's anchor ID is set to the animeID
 function openAnime(e) {
-    // console.log(`Opening anime ${e.id}`);
     const aniID = e.id;
     const episodeSuffix = "-episode-1";
     window.location.href = `stream?animeid=${e.id}&episodeid=${e.id}${episodeSuffix}`;
 }
+
+// Pseudo-form Search handler
+$('#search').submit(e => {
+    e.preventDefault();
+    const searchInput = $('#anime-search').val();
+    window.location.href = `search?search=${searchInput}`;
+});

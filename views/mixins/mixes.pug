@@ -1,12 +1,13 @@
 mixin navbar
     nav
         .rightnav
-            a#main-logo(href='index.html')
-            img.logo(src='../images/bread.png' alt='logo')
-            h1 breadnime!
+            a#main-logo(href='/')
+                img.logo(src='static/images/bread.png' alt='logo')
+                h1 breadnime!
         .leftnav
             .search-wrapper
-            form#search
-                input#anime-search.search(type='text' placeholder='Search')
-                input.button(type='submit' value='GO!')
-                input.rando(type='button' value='Random')
+                // Pseudo-form
+                form#search
+                    input#anime-search.search(type='text' placeholder='Search')
+                    input.button(type='submit' value='GO!')
+                    input.rando(type='button' value='Random')

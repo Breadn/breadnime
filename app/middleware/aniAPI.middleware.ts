@@ -22,6 +22,7 @@ export async function getSearch(req: Request, res: Response, next: Function) {
 
     // Pass data to view renderer...
     res.locals.data = result;
+    res.locals.searchTerms = searchTerms;
     next();
 }
 
@@ -37,10 +38,18 @@ export async function getAnime(req: Request, res: Response, next: Function) {
         console.log(`Fetched anime detail for ${animeID}`);
         // console.log(data);
         return data;
+    })
+    .catch(err => {
+        console.log(err);
+        return null;
     });
 
-    res.locals.data_anime = result;
-    next();
+    if (result) {
+        res.locals.data_anime = result;
+        next();
+    }
+    else
+        res.status(404).send('<h1>404: there is no bread!</h1>');
 }
 
 // Function for returning M3U8 streaming URLs of specific episode ID
@@ -55,13 +64,16 @@ export async function getEpisodeStreams(req: Request, res: Response, next: Funct
         return data;
     })
     .catch(err => {
-        res.locals.data_episode = {};
         console.log(err);
-        next();
+        return null;
     });
 
-    res.locals.data_episode = result;
-    next();
+    if (result) {
+        res.locals.data_episode = result;
+        next();
+    }
+    else
+        res.status(404).send('<h1>404: this is no bread!</h1>');
 }
 
 // Function returning JSON data on current popular anime

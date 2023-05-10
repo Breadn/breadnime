@@ -9,11 +9,10 @@ export function indexView(req: Request, res: Response) {
 
 export function galleryView(req: Request, res: Response) {
     console.log("Ended request at galleryView render");
-    res.render('gallery', { data: res.locals.data });
+    res.render('gallery', { data: res.locals.data, search: res.locals.searchTerms });
 }
 
 export function animeView(req: Request, res: Response) {
     console.log("Ended request at animeView render");
-    console.log(`Received anime data: ${JSON.stringify(res.locals.data_anime)}`);
-    res.send(res.locals.data_episode);
+    res.render('anime', { animeData: res.locals.data_anime, streamData: res.locals.data_episode });
 }
