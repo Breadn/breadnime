@@ -28,7 +28,7 @@ block section
                         // Render genres here
                         each genre in aniData.genres 
                             #genre(onclick=`openGenre('${genre}')`) ##{genre}
-                div 
+                div
                     img#ani-image(src=aniData.image alt='ani-image' style='float:left;')
                     p#ani-description #{aniData.description}
                 .ep

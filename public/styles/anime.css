@@ -29,12 +29,12 @@ p {
 
 .genre {
     display: flex;
+    flex-wrap: wrap;
     flex-direction: row;
-    justify-content: space-between;
 }
 
 .genre > div {
-    margin: 0px 5px 0px 5px;
+    margin: 3px 5px;
     padding: 0px 5px 0px 3px;
 
     background-color: #5c64cb;
@@ -98,7 +98,7 @@ button:hover {
 
 .quality > button {
     border-radius: 0;
-    margin-bottom: 0;
+    margin-bottom: 10px;
     width: 70px;
 }
 
@@ -112,11 +112,19 @@ button:hover {
 
 .rightmain{
     margin-left: 2rem;
-    
+    width: 80%;
+}
+
+.hls-video-dimensions {
+    width: 75vw;
+    max-width: 960px;
+    height: 400px;
 }
 
 .main img{
-    height: 75vh;
+    height: 40vw;
+    max-height: 350px;
+    padding: 0 2% 0 0;
 }
 
 /* .ep {
