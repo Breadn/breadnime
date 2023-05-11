@@ -14,5 +14,9 @@ export function galleryView(req: Request, res: Response) {
 
 export function animeView(req: Request, res: Response) {
     console.log("Ended request at animeView render");
-    res.render('anime', { animeData: res.locals.data_anime, streamData: res.locals.data_episode });
+    let viewDataObj = {
+        curr_epID: res.locals.data_episode.curr_epID,
+        // TODO: pack loaded sess data here
+    }
+    res.render('anime', { animeData: res.locals.data_anime, streamData: res.locals.data_episode, viewData: viewDataObj });
 }

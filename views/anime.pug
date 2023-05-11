@@ -11,6 +11,7 @@ block append styles
 block section
     - let aniData = animeData
     - let vidData = streamData
+    - let renData = viewData
     section
         .main
             .rightmain
@@ -34,7 +35,11 @@ block section
                 .ep
                     // Render buttons here
                     each ep in aniData.episodes
-                        button(type='button' title=ep.id id=ep.id onclick=`selectButtonCSS(this);openAnimeEpisode(this, '${aniData.id}')`) #{ep.number}
+                        // Mark current episode button active
+                        if ep.id == renData.curr_epID
+                            button.selected-button(type='button' title=ep.id id=ep.id onclick=`selectButtonCSS(this);openAnimeEpisode(this, '${aniData.id}')`) #{ep.number}
+                        else 
+                            button(type='button' title=ep.id id=ep.id onclick=`selectButtonCSS(this);openAnimeEpisode(this, '${aniData.id}')`) #{ep.number}
 
 block append scripts 
     script(src="static/javascripts/anime.js")

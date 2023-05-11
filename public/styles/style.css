@@ -9,6 +9,10 @@ body {
     color: rgb(30, 30, 30);
 }
 
+a {
+    cursor: pointer;
+}
+
 h3 {
     font-size: 50px;
     font-weight: 500;
@@ -86,6 +90,8 @@ input.search {
     font-weight: 600;
     font-size: 16px;
     margin-left: 5px;
+    margin-top: 3px;
+    cursor: pointer;
 }
 
 .rando {
@@ -98,6 +104,8 @@ input.search {
     font-weight: 600;
     font-size: 16px;
     margin-left: 10px;
+    margin-top: 3px;
+    cursor: pointer;
 }
 
 

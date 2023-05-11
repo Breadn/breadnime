@@ -4,14 +4,8 @@ import session from 'express-session'
 import filestoreImport from 'session-file-store'
 import qs from 'querystring'
 
-import pageRouter = require('./routes/page.route');
-
-// DEBUG: custon .d.ts file in custom_types not working? specified typeRoots dir in tsconfig??
-declare module 'express-session' {
-    export interface SessionData {
-        user: string;
-    }
-}
+// Route imports
+import pageRouter = require('./routes/page.route')
 
 // App setup
 const app = express();
@@ -27,6 +21,7 @@ app.set('views', './views');
 app.set('view engine', 'pug');
 
 // Session setup
+// Note: session declarations in node_modules/@types/express-session/index.d.ts:222
 app.use(session({
     name: 'session-id',
     secret: 'kXp2r5u8x/A?D(G+',
@@ -38,26 +33,10 @@ app.use(session({
 // Static setup
 app.use('/static', express.static('public'));
 
-// Note: session declarations in node_modules/@types/express-session/index.d.ts:222
-app.get('/session.html', (req, res) => { // TODO: implement sessions in respective pages
-    console.log(req.session);
-
-    if (!req.session.user) {
-        console.log("no user")
-        req.session.user = "your new name!";
-    }
-    console.log(req.session.user);
-
-    res.send(req.session.user);
-});
-
-
-// Middlewares
-// app.use(express.static('public'));
-// app.use(express.static('views'));
+// Routers
 app.use('/', pageRouter);
 
-// test
+// Server activity logger
 app.use((req, res) => {
     console.log(`HTTP request made to server at time: ${Date.now()}`);
 });

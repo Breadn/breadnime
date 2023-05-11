@@ -70,10 +70,11 @@ export async function getEpisodeStreams(req: Request, res: Response, next: Funct
 
     if (result) {
         res.locals.data_episode = result;
+        res.locals.data_episode.curr_epID = episodeID;
         next();
     }
     else
-        res.status(404).send('<h1>404: this is no bread!</h1>');
+        res.status(404).send('<h1>404: there is no bread!</h1>');
 }
 
 // Function returning JSON data on current popular anime
