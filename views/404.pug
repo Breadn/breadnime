@@ -1,0 +1,10 @@
+extends layouts/base.pug
+include mixins/mixes.pug
+
+block nav 
+    +navbar
+
+block section 
+    .not-found 
+        h4 404: There is no bread!
+        h6(style='font-style: italic; color: gray;') The anime probably isn't out yet, or you have the wrong URL...
