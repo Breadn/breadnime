@@ -41,17 +41,13 @@ export async function getAnime(req: Request, res: Response, next: Function) {
         return data;
     })
     .catch(err => {
-        console.log(err);
-        return null;
+        next(err);
     });
 
     if (result) {
         res.locals.data_anime = result;
         next();
     }
-    else
-        res.status(404);
-        res.render('404');
 }
 
 // Function for returning M3U8 streaming URLs of specific episode ID
@@ -66,8 +62,7 @@ export async function getEpisodeStreams(req: Request, res: Response, next: Funct
         return data;
     })
     .catch(err => {
-        console.log(err);
-        return null;
+        next(err);
     });
 
     if (result) {
@@ -75,9 +70,6 @@ export async function getEpisodeStreams(req: Request, res: Response, next: Funct
         res.locals.data_episode.curr_epID = episodeID;
         next();
     }
-    else
-        res.status(404);
-        res.render('404');
 }
 
 // Function returning JSON data on current popular anime

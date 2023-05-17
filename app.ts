@@ -1,5 +1,6 @@
 // ES6 imports
 import express from 'express'
+import { Request, Response } from 'express'
 import session from 'express-session'
 import filestoreImport from 'session-file-store'
 import qs from 'querystring'
@@ -38,11 +39,15 @@ app.use('/static', express.static('public'));
 app.use('/', pageRouter);
 app.use('/anime', animeRouter);
 
-// Generic routes
-app.all('*', (req, res) => {
-    res.status(404);
-    res.render('404');
+// Error Handlers
+app.use((err: Error, req: Request, res: Response, next: Function) => {
+    console.error(err.stack);
+    res.status(404).render('404');
 });
+
+app.use('*', (req: Request, res: Response) => {
+    res.status(404).render('404');
+})
 
 // Server activity logger
 app.use((req, res) => {
