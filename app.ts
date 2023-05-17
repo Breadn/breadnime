@@ -6,6 +6,7 @@ import qs from 'querystring'
 
 // Route imports
 import pageRouter = require('./routes/page.route')
+import animeRouter = require('./routes/anime.route');
 
 // App setup
 const app = express();
@@ -35,6 +36,13 @@ app.use('/static', express.static('public'));
 
 // Routers
 app.use('/', pageRouter);
+app.use('/anime', animeRouter);
+
+// Generic routes
+app.all('*', (req, res) => {
+    res.status(404);
+    res.render('404');
+});
 
 // Server activity logger
 app.use((req, res) => {

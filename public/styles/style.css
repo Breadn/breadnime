@@ -13,6 +13,10 @@ a {
     cursor: pointer;
 }
 
+.not-found {
+    padding: 100px 25%;
+}
+
 h3 {
     font-size: 50px;
     font-weight: 500;
@@ -157,6 +161,7 @@ footer {
         width: 80px;
         font-size: 14px;
     }
+
     h3 {
         font-size: 30px;
     }
