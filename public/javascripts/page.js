@@ -37,3 +37,10 @@ $('#search').submit(e => {
     const searchInput = $('#anime-search').val();
     window.location.href = `search?search=${searchInput}`;
 });
+
+// Random button handler
+$('.rando').on('click', e => {
+    e.stopPropagation();
+    e.stopImmediatePropagation();
+    window.location.href = 'random';
+});

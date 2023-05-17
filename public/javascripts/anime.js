@@ -30,7 +30,6 @@ function renderVideoStream(url) {
     });
 }
 
-
 function openGenre(type) {
     console.log(`WIP: Opened genre ${type}`);
 }
