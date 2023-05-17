@@ -7,6 +7,7 @@ import { ANIME } from '@consumet/extensions'
 
 const API_PROVIDER = new ANIME.Gogoanime();
 
+/////// breadnime routing consumet API functions ///////
 /* GET query @params: search */
 // Function returning JSON data on anime searched by keywords
 export async function getSearch(req: Request, res: Response, next: Function) {
@@ -49,7 +50,8 @@ export async function getAnime(req: Request, res: Response, next: Function) {
         next();
     }
     else
-        res.status(404).send('<h1>404: there is no bread!</h1>');
+        res.status(404);
+        res.render('404');
 }
 
 // Function for returning M3U8 streaming URLs of specific episode ID
@@ -74,7 +76,8 @@ export async function getEpisodeStreams(req: Request, res: Response, next: Funct
         next();
     }
     else
-        res.status(404).send('<h1>404: there is no bread!</h1>');
+        res.status(404);
+        res.render('404');
 }
 
 // Function returning JSON data on current popular anime
@@ -90,4 +93,17 @@ export async function getPopular(req: Request, res: Response, next: Function) {
 
     res.locals.data = result;
     next();
+}
+
+
+////// Helper functions ///////
+// Raw search function
+export async function getSearch_raw(searchTerms: string) {
+    const result = await API_PROVIDER.search(searchTerms)
+    .then(data => {
+        console.log(`Fetched raw search data for ${searchTerms}`);
+        return data;
+    });
+
+    return result;
 }
