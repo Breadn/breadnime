@@ -1,13 +1,13 @@
 extends layouts/base.pug
 
 block append styles 
-    link(rel='stylesheet' href='static/styles/index.css')
+    link(rel='stylesheet' href='/static/styles/index.css')
 
 block section
     section
         .main-content
             #main-logo
-                img.logo(src='static/images/bread.png' alt='logo')
+                img.logo(src='/static/images/bread.png' alt='logo')
                 h1 breadnime!
             h3 Ad-free anime, really!
             .search-wrapper
@@ -21,7 +21,7 @@ block section
             | Enjoy your favorite anime, browsing stress (crtl+w) free.
         .sub-content
             button
-                img#left-carousel(src='static/images/Vector.png' alt='left')
+                img#left-carousel(src='/static/images/Vector.png' alt='left')
             .carousel
                 // Render carousel data here
                 - let aniData = data;
@@ -33,5 +33,5 @@ block section
                                     img(src=ani.image)
                                 p= ani.title
             button
-                img#right-carousel(src='static/images/Vector-1.png' alt='right')
+                img#right-carousel(src='/static/images/Vector-1.png' alt='right')
         

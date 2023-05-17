@@ -5,7 +5,7 @@ block nav
     +navbar
 
 block append styles 
-    link(rel='stylesheet' href='static/styles/anime.css')
+    link(rel='stylesheet' href='/static/styles/anime.css')
     link(rel='stylesheet' href="https://unpkg.com/video.js/dist/video-js.css")
 
 block section
@@ -42,6 +42,6 @@ block section
                             button(type='button' title=ep.id id=ep.id onclick=`selectButtonCSS(this);openAnimeEpisode(this, '${aniData.id}')`) #{ep.number}
 
 block append scripts 
-    script(src="static/javascripts/anime.js")
+    script(src="/static/javascripts/anime.js")
     script(src='https://unpkg.com/video.js/dist/video.js')
     script(src='https://unpkg.com/videojs-flash/dist/videojs-flash.js')
