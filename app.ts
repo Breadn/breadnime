@@ -37,7 +37,7 @@ app.use('/static', express.static('public'));
 
 // Routers
 app.use('/', pageRouter);
-app.use('/anime', animeRouter);
+app.use('/', animeRouter);
 
 // Error Handlers
 app.use((err: Error, req: Request, res: Response, next: Function) => {
