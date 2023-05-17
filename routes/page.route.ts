@@ -1,5 +1,4 @@
 // File responsible for handling generic webpage navigation routing
-
 import express from 'express'
 import * as aniAPI from '../app/middleware/aniAPI.middleware'
 import * as usrSess from '../app/middleware/userSession.middleware'
