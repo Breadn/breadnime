@@ -47,7 +47,7 @@ app.use((err: Error, req: Request, res: Response, next: Function) => {
 
 app.use('*', (req: Request, res: Response) => {
     res.status(404).render('404');
-})
+});
 
 // Server activity logger
 app.use((req, res) => {

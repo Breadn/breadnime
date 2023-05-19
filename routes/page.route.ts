@@ -12,4 +12,6 @@ router.get('/search', aniAPI.getSearch, viewControllers.galleryView);
 
 router.get('/stream', aniAPI.getAnime, aniAPI.getEpisodeStreams, usrSess.testSesh, viewControllers.animeView);
 
+router.get('/status', aniAPI.getStatus);
+
 export = router;

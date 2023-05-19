@@ -8,15 +8,22 @@ import { ANIME } from '@consumet/extensions'
 const API_PROVIDER = new ANIME.Gogoanime();
 
 /////// breadnime routing consumet API functions ///////
+// Function returning API provider status
+export async function getStatus(req: Request, res: Response) {
+    console.log("~~~ Status Report ~~~");
+    console.log(API_PROVIDER.isWorking);
+    res.send(`${API_PROVIDER.name} status: ${API_PROVIDER.isWorking ? "Up" : "Down"}`);
+}
+
 /* GET query @params: search */
 // Function returning JSON data on anime searched by keywords
 export async function getSearch(req: Request, res: Response, next: Function) {
     console.log("Get search middleware");
 
     const searchTerms = String(req.query.search || "");
+    console.log(`Fetching search data for ${searchTerms}`);
     const result = await API_PROVIDER.search(searchTerms)
     .then(data => {
-        console.log(`Fetched search data for ${searchTerms}`);
         // console.log(data);
         return data;
     });
@@ -34,10 +41,10 @@ export async function getAnime(req: Request, res: Response, next: Function) {
     console.log("Get anime middleware");
 
     const animeID = String(req.query.animeid || "");
+    console.log(`Fetching anime detail for ${animeID}`);
     const result = await API_PROVIDER.fetchAnimeInfo(animeID)
     .then(data => {
-        console.log(`Fetched anime detail for ${animeID}`);
-        // console.log(data);
+        console.log(data);
         return data;
     })
     .catch(err => {
@@ -55,10 +62,10 @@ export async function getEpisodeStreams(req: Request, res: Response, next: Funct
     console.log("Get streams middleware");
 
     const episodeID = String(req.query.episodeid || "");
+    console.log(`Fetching stream sources for ${episodeID}`);
     const result = await API_PROVIDER.fetchEpisodeSources(episodeID)
     .then(data => {
-        console.log(`Fetched stream sources for ${episodeID}`);
-        // console.log(data);
+        console.log(data);
         return data;
     })
     .catch(err => {
