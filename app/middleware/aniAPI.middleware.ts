@@ -24,7 +24,7 @@ export async function getSearch(req: Request, res: Response, next: Function) {
     console.log(`Fetching search data for ${searchTerms}`);
     const result = await API_PROVIDER.search(searchTerms)
     .then(data => {
-        console.log(data);
+        // console.log(data);
         return data;
     });
 
@@ -44,7 +44,7 @@ export async function getAnime(req: Request, res: Response, next: Function) {
     console.log(`Fetching anime detail for ${animeID}`);
     const result = await API_PROVIDER.fetchAnimeInfo(animeID)
     .then(data => {
-        console.log(data);
+        // console.log(data);
         return data;
     })
     .catch(err => {
@@ -71,7 +71,7 @@ export async function getEpisodeStreams(req: Request, res: Response, next: Funct
         console.log(`Fetching stream sources for ${episodeID}`);
         const result = await API_PROVIDER.fetchEpisodeSources(episodeID)
         .then(data => {
-            console.log(data);
+            // console.log(data);
             return data;
         })
         .catch(err => {
