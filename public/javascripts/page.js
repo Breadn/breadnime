@@ -27,8 +27,9 @@ $('.sub-content button').click((e) => {
 // handler's anchor ID is set to the animeID
 function openAnime(e) {
     const aniID = e.id;
-    const episodeSuffix = "-episode-1";
-    window.location.href = `stream?animeid=${e.id}&episodeid=${e.id}${episodeSuffix}`;
+    const epID = "";
+    const episodeSuffix = "";
+    window.location.href = `stream?animeid=${aniID}&episodeid=${epID}${episodeSuffix}`;
 }
 
 // Pseudo-form Search handler

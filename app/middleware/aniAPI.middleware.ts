@@ -3,7 +3,7 @@
  */
 
 import { Request, Response } from 'express'
-import { ANIME } from '@consumet/extensions'
+import { ANIME, StreamingServers } from '@consumet/extensions'
 
 const API_PROVIDER = new ANIME.Enime();
 
@@ -24,7 +24,7 @@ export async function getSearch(req: Request, res: Response, next: Function) {
     console.log(`Fetching search data for ${searchTerms}`);
     const result = await API_PROVIDER.search(searchTerms)
     .then(data => {
-        // console.log(data);
+        console.log(data);
         return data;
     });
 
@@ -62,20 +62,27 @@ export async function getEpisodeStreams(req: Request, res: Response, next: Funct
     console.log("Get streams middleware");
 
     const episodeID = String(req.query.episodeid || "");
-    console.log(`Fetching stream sources for ${episodeID}`);
-    const result = await API_PROVIDER.fetchEpisodeSources(episodeID)
-    .then(data => {
-        console.log(data);
-        return data;
-    })
-    .catch(err => {
-        next(err);
-    });
-
-    if (result) {
-        res.locals.data_episode = result;
-        res.locals.data_episode.curr_epID = episodeID;
+    if (!episodeID.length) {
+        res.locals.data_episode = null;
+        res.locals.data_curr_epID = null;
         next();
+    }
+    else {
+        console.log(`Fetching stream sources for ${episodeID}`);
+        const result = await API_PROVIDER.fetchEpisodeSources(episodeID)
+        .then(data => {
+            console.log(data);
+            return data;
+        })
+        .catch(err => {
+            next(err);
+        });
+
+        if (result) {
+            res.locals.data_episode = result;
+            res.locals.data_curr_epID = episodeID;
+            next();
+        }
     }
 }
 
