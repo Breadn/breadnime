@@ -28,7 +28,7 @@ block section
                     h6#ani-status Status: #{aniData.status}
                     .genre
                         // Render genres here
-                        if genres
+                        if aniData.genres
                             each genre in aniData.genres 
                                 #genre(onclick=`openGenre('${genre}')`) ##{genre}
                 div

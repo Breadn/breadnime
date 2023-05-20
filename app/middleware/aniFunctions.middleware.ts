@@ -29,6 +29,6 @@ export async function searchRandomAnime(req: Request, res: Response, next: Funct
     let randAni = result.results[Math.floor(Math.random() * result.results.length)];
 
     req.query.animeid = randAni.id;
-    req.query.episodeid = `${randAni.id}-episode-1`;
+    req.query.episodeid = "";
     next();
 }
