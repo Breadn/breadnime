@@ -26,6 +26,9 @@ export async function getSearch(req: Request, res: Response, next: Function) {
     .then(data => {
         // console.log(data);
         return data;
+    })
+    .catch(err => {
+        next(err);
     });
 
     // Pass data to view renderer...
