@@ -25,13 +25,14 @@ block section
             .carousel
                 // Render carousel data here
                 - let aniData = data;
-                each ani in aniData.results
-                    .carousel-item
-                        a(id=ani.id onclick='openAnime(this)')
-                            .mainview 
-                                .img 
-                                    img(src=ani.image)
-                                p= ani.title
+                if aniData
+                    each ani in aniData.results
+                        .carousel-item
+                            a(id=ani.id onclick='openAnime(this)')
+                                .mainview 
+                                    .img 
+                                        img(src=ani.image)
+                                    p= ani.title
             button
                 img#right-carousel(src='/static/images/Vector-1.png' alt='right')
         

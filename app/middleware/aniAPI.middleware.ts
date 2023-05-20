@@ -5,7 +5,7 @@
 import { Request, Response } from 'express'
 import { ANIME } from '@consumet/extensions'
 
-const API_PROVIDER = new ANIME.Gogoanime();
+const API_PROVIDER = new ANIME.Enime();
 
 /////// breadnime routing consumet API functions ///////
 // Function returning API provider status
@@ -83,13 +83,14 @@ export async function getEpisodeStreams(req: Request, res: Response, next: Funct
 export async function getPopular(req: Request, res: Response, next: Function) {
     console.log("Get popular middleware");
 
-    const result = await API_PROVIDER.fetchTopAiring()
-    .then(data => {
-        console.log(`Fetched top airing detail`);
-        // console.log(data);
-        return data;
-    });
-
+    // const result = await API_PROVIDER.fetchTopAiring()
+    // .then(data => {
+    //     console.log(`Fetched top airing detail`);
+    //     // console.log(data);
+    //     return data;
+    // });
+    const result = null;
+    
     res.locals.data = result;
     next();
 }
