@@ -36,7 +36,7 @@ block section
                     p#ani-description #{aniData.description}
                 .ep
                     // Render buttons here
-                    each ep in aniData.episodes
+                    each ep in aniData.episodes.reverse()
                         // Mark current episode button active
                         if renData.curr_epID && ep.id == renData.curr_epID
                             button.selected-button(type='button' title=ep.id id=ep.id onclick=`selectButtonCSS(this);openAnimeEpisode(this, '${aniData.id}')`) #{ep.number}
