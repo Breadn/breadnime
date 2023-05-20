@@ -106,3 +106,20 @@ export async function getSearch_raw(searchTerms: string) {
 
     return result;
 }
+
+
+////// Test functions //////
+export async function test(req: Request, res: Response) {
+    console.log("Test API middleware function called");
+    const TEST_PROVIDER = new ANIME.Enime();
+    TEST_PROVIDER.fetchEpisodeSources("clfta46nb0041pkjyjuesnb1n")
+    .then(data => {
+        console.log(data);
+    })
+    .catch(err => {
+        console.log(err);
+    });
+
+
+    res.end();
+}

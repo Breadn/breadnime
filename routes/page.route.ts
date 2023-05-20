@@ -14,4 +14,6 @@ router.get('/stream', aniAPI.getAnime, aniAPI.getEpisodeStreams, usrSess.testSes
 
 router.get('/status', aniAPI.getStatus);
 
+router.get('/test', aniAPI.test);
+
 export = router;
