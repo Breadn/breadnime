@@ -3,9 +3,10 @@
  */
 
 import { Request, Response } from 'express'
-import { ANIME } from '@consumet/extensions'
+import { ANIME, StreamingServers } from '@consumet/extensions'
 
-const API_PROVIDER = new ANIME.Gogoanime();
+const API_PROVIDER = new ANIME.Zoro();
+// const SERVER_PROVIDER: StreamingServers = StreamingServers.AsianLoad;
 
 /////// breadnime routing consumet API functions ///////
 // Function returning API provider status
@@ -24,7 +25,7 @@ export async function getSearch(req: Request, res: Response, next: Function) {
     console.log(`Fetching search data for ${searchTerms}`);
     const result = await API_PROVIDER.search(searchTerms)
     .then(data => {
-        // console.log(data);
+        console.log(data);
         return data;
     });
 
@@ -62,20 +63,27 @@ export async function getEpisodeStreams(req: Request, res: Response, next: Funct
     console.log("Get streams middleware");
 
     const episodeID = String(req.query.episodeid || "");
-    console.log(`Fetching stream sources for ${episodeID}`);
-    const result = await API_PROVIDER.fetchEpisodeSources(episodeID)
-    .then(data => {
-        console.log(data);
-        return data;
-    })
-    .catch(err => {
-        next(err);
-    });
-
-    if (result) {
-        res.locals.data_episode = result;
-        res.locals.data_episode.curr_epID = episodeID;
+    if (!episodeID.length) {
+        res.locals.data_episode = null;
+        res.locals.data_curr_epID = null;
         next();
+    }
+    else {
+        console.log(`Fetching stream sources for ${episodeID}`);
+        const result = await API_PROVIDER.fetchEpisodeSources(episodeID)
+        .then(data => {
+            console.log(data);
+            return data;
+        })
+        .catch(err => {
+            next(err);
+        });
+
+        if (result) {
+            res.locals.data_episode = result;
+            res.locals.data_curr_epID = episodeID;
+            next();
+        }
     }
 }
 
@@ -83,10 +91,10 @@ export async function getEpisodeStreams(req: Request, res: Response, next: Funct
 export async function getPopular(req: Request, res: Response, next: Function) {
     console.log("Get popular middleware");
 
-    const result = await API_PROVIDER.fetchTopAiring()
+    const result = await API_PROVIDER.fetchRecentEpisodes()
     .then(data => {
         console.log(`Fetched top airing detail`);
-        // console.log(data);
+        console.log(data);
         return data;
     });
 

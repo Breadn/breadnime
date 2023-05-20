@@ -19,16 +19,18 @@ block section
                     source#stream-source(src='placeholder' type='application/x-mpegURL')
                 .quality
                     // Render qualities here
-                    each src in vidData.sources
-                        button(type='button' title=src.quality id=src.quality value=`.quality` onclick="selectButtonCSS(this);renderVideoStream('"+src.url+"')") #{src.quality}
+                    if vidData
+                        each src in vidData.sources
+                            button(type='button' title=src.quality id=src.quality value=`.quality` onclick="selectButtonCSS(this);renderVideoStream('"+src.url+"')") #{src.quality}
                 p.title #{aniData.title}
                 #ani-stats
                     h6#ani-released Released: #{aniData.releaseDate}
                     h6#ani-status Status: #{aniData.status}
                     .genre
                         // Render genres here
-                        each genre in aniData.genres 
-                            #genre(onclick=`openGenre('${genre}')`) ##{genre}
+                        if genres
+                            each genre in aniData.genres 
+                                #genre(onclick=`openGenre('${genre}')`) ##{genre}
                 div
                     img#ani-image(src=aniData.image alt='ani-image' style='float:left;')
                     p#ani-description #{aniData.description}
@@ -36,7 +38,7 @@ block section
                     // Render buttons here
                     each ep in aniData.episodes
                         // Mark current episode button active
-                        if ep.id == renData.curr_epID
+                        if renData.curr_epID && ep.id == renData.curr_epID
                             button.selected-button(type='button' title=ep.id id=ep.id onclick=`selectButtonCSS(this);openAnimeEpisode(this, '${aniData.id}')`) #{ep.number}
                         else 
                             button(type='button' title=ep.id id=ep.id onclick=`selectButtonCSS(this);openAnimeEpisode(this, '${aniData.id}')`) #{ep.number}
